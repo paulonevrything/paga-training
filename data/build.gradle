@@ -1,0 +1,93 @@
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'java'
+//apply plugin: 'gradle-git'
+
+defaultTasks 'updateLocalDatabase'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    compile('org.codehaus.groovy:groovy-all:2.4.5')
+    runtime('net.sourceforge.jtds:jtds:1.2.7')
+}
+
+
+
+sourceSets {
+
+    main {
+
+        output.classesDir = '.temp/classes'
+
+        groovy {
+            srcDirs = ['application/tools']
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
+
+//task updateLocalDatabaseDefault (dependsOn: 'classes', type: JavaExec) {
+//    main = 'update_local_db'
+//    classpath = sourceSets.main.runtimeClasspath
+//    args ''
+//}
+
+task updateLocalDatabase (dependsOn: 'classes', type: JavaExec) {
+    main = 'update_local_db'
+    classpath = sourceSets.main.runtimeClasspath
+
+    def branch =getWorkingBranch()
+
+    args "${branch}"
+}
+
+//task updateLocalDatabaseFull (dependsOn: 'classes', type: JavaExec) {
+//    main = 'update_local_db'
+//    classpath = sourceSets.main.runtimeClasspath
+//    args 'full'
+//}
+
+
+task generateDatabaseScripts (dependsOn: 'classes', type: JavaExec) {
+    main = 'generate_db_scipts'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task generateDatabaseMapping (dependsOn: 'classes', type: JavaExec) {
+    main = 'generate_db_mapping'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task generateDatabaseModel (dependsOn: 'classes', type: JavaExec) {
+    main = 'generate_db_model'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+
+/**
+ * Get the name of the working branch of the project
+ *
+ * @return Name of the working (Current) branch
+ */
+def getWorkingBranch() {
+
+    def workingBranch = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+    //print "Working branch: " + workingBranch +"\n"
+    return workingBranch
+}
+
+task generateDatabase (dependsOn: ['generateDatabaseModel', 'generateDatabaseMapping', 'generateDatabaseScripts']) {}
+
+
+

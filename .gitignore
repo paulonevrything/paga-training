@@ -3,4 +3,7 @@
 .gradle/
 .idea/
 build/
-
+data/.temp/
+data/.timestamp/
+**/*.iml
+classes/
