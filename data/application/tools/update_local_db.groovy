@@ -123,7 +123,7 @@ def executeScripts(directory) {
                 try {
             
                     def exeResult = executeProcess(
-                            "mysql -u ${dbProperties['jdbc.username']} -p${dbProperties['jdbc.password']} ${dbProperties['jdbc.catalog']}",
+                            "/usr/local/mysql/bin/mysql -u ${dbProperties['jdbc.username']} -p${dbProperties['jdbc.password']} ${dbProperties['jdbc.catalog']}",
                             dbScriptFilePath,
                             null)
 			

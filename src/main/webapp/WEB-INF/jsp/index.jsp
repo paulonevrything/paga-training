@@ -15,5 +15,7 @@
     <h1>Welcome to ${owner} Video Rental</h1>
 
     <img src="<c:url value="/resources/img/logo.jpg"/>">
+
+    <h1>${user} is logged in currently</h1>
 </body>
 </html>
