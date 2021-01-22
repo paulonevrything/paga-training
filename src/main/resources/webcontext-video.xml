@@ -11,6 +11,7 @@
     <context:component-scan base-package="com.apposit.training.video.rental"/>
 
     <mvc:resources mapping="/resources/**" location="/WEB-INF/assets/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/assets/js/"/>
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
 
