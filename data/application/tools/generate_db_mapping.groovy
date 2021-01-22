@@ -389,7 +389,7 @@ def execute() {
 			
 				def mappingNamespace = table.mappingNamespace ?: configuration.mappingNamespace
 				
-				def mapperDir = projectDirPath + "/" + sourcePath + "/" + configuration.rootNamespace.replaceAll("\\.", "/") + "/" + mappingNamespace.replaceAll("\\.", "/")
+				def mapperDir = projectDirPath + "/src/main/java/com/apposit/training/video/rental/data/sql";
 				
 				def mapperFilePath = mapperDir + "/${table.name}Mapper.java"
 						   

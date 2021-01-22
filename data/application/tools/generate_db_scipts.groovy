@@ -326,7 +326,7 @@ def execute() {
 			
 			if(!table.isParent) {
 				
-				if ((configuration.deployed && table.recreateTable) || !isTableExist(configuration, table.name)) {
+				if ((configuration.deployed && table.recreateTable)) {
 					
 					log("Creating table " + table.name)
 					

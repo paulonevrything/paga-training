@@ -356,7 +356,7 @@ def execute() {
 			
 				def modelNamespace = table.modelNamespace ?: configuration.modelNamespace
 				
-				def modelDir = projectDirPath + "/" + sourcePath + "/" + configuration.rootNamespace.replace(".", "/") + "/" + modelNamespace.replace(".", "/")
+				def modelDir = projectDirPath + "/src/main/java/com/apposit/training/video/rental/data"
 	 
 				def modelFilePath = modelDir + "/${table.name}.java"
 				
