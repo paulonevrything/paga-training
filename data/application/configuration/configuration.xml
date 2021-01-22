@@ -44,19 +44,10 @@
             <object name="mapping" />
         </excludeObjects>
     </table>
-    <table recreateTable="true" name="User" type="Entity">
-        <fields>
-            <field fieldName="FirstName" dataType="varchar(50)" isNull="false" default="" />
-            <field fieldName="LastName" dataType="nvarchar(50)" isNull="false" default="" />
-            <field fieldName="Username" dataType="nvarchar(255)" isNull="false" default="" />
-        </fields>
-        <features>
-            <feature name="Audit" />
-        </features>
-        <relationships>
-        </relationships>
-    </table>
-    <table recreateTable="true" name="VideoType" type="Reference" class="com.apposit.training.video.rental.model.VideoTypeEnum">
+
+
+
+    <table recreateTable="true" name="VideoType" type="Reference" class="com.apposit.training.video.rental.model.VideoTypes">
         <fields>
             <field fieldName="Description" dataType="nvarchar(50)" isNull="true" default="" />
         </fields>
@@ -66,7 +57,10 @@
             <value name="NEW_RELEASE" description="New Release" />
         </values>
     </table>
-    <table recreateTable="true" name="VideoGenre" type="Reference" class="com.apposit.training.video.rental.model.VideoGenreEnum">
+
+
+
+    <table recreateTable="true" name="VideoGenre" type="Reference" class="com.apposit.training.video.rental.model.VideoGenres">
         <fields>
             <field fieldName="Description" dataType="nvarchar(50)" isNull="true" default="" />
         </fields>
@@ -78,6 +72,9 @@
             <value name="HORROR" description="Horror" />
         </values>
     </table>
+
+
+
     <table recreateTable="true" name="Video" type="Entity">
         <fields>
             <field fieldName="Title" dataType="varchar(100)" isNull="false" default="" />
@@ -95,18 +92,21 @@
             <relationship parentTable="VideoGenre" fkField="VideoGenreId"/>
         </relationships>
     </table>
-    <table recreateTable="true" name="RentPricing" type="Entity">
-        <fields>
-            <field fieldName="DailyRate" dataType="decimal(18,2)" isNull="false" default="" />
-            <field fieldName="VideoTypeId" dataType="varchar(50)" isNull="false" />
-        </fields>
-        <features>
-            <feature name="Audit" />
-        </features>
-        <relationships>
-            <relationship parentTable="VideoType" fkField="VideoTypeId"/>
-        </relationships>
-    </table>
+
+
+
+<!--    <table recreateTable="true" name="RentPricing" type="Entity">-->
+<!--        <fields>-->
+<!--            <field fieldName="DailyRate" dataType="decimal(18,2)" isNull="false" default="" />-->
+<!--            <field fieldName="VideoTypeId" dataType="varchar(50)" isNull="false" />-->
+<!--        </fields>-->
+<!--        <features>-->
+<!--            <feature name="Audit" />-->
+<!--        </features>-->
+<!--        <relationships>-->
+<!--            <relationship parentTable="VideoType" fkField="VideoTypeId"/>-->
+<!--        </relationships>-->
+<!--    </table>-->
 
 </configuration>
 

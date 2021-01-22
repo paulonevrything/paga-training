@@ -2,6 +2,7 @@ package com.apposit.training.video.rental;
 
 import com.apposit.training.video.rental.model.Credentials;
 import com.apposit.training.video.rental.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ public class VideoController {
 
     private LoginService loginService;
 
+    @Autowired
     public VideoController(LoginService loginService) {
         this.loginService = loginService;
     }
