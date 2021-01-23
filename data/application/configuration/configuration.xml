@@ -78,7 +78,7 @@
     <table recreateTable="true" name="Video" type="Entity">
         <fields>
             <field fieldName="Title" dataType="varchar(100)" isNull="false" default="" />
-            <field fieldName="ImgUrl" dataType="varchar(100)" isNull="true" default="" />
+            <field fieldName="ImgUrl" dataType="varchar(500)" isNull="true" default="" />
             <field fieldName="YearReleased" dataType="int" isNull="true" default="" />
             <field fieldName="MaximumAge" dataType="int" isNull="true" default="" />
             <field fieldName="VideoTypeId" dataType="varchar(50)" isNull="false" />

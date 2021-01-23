@@ -2,12 +2,16 @@ package com.apposit.training.video.rental;
 
 import com.apposit.training.video.rental.model.Credentials;
 import com.apposit.training.video.rental.service.LoginService;
+import com.apposit.training.video.rental.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import com.apposit.training.video.rental.model.Video;
+
+import java.util.List;
 
 /**
  * Created by uduke on 2017/03/06.
@@ -16,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class VideoController {
 
     private LoginService loginService;
+
+    @Autowired
+    private VideoService videoService;
 
     @Autowired
     public VideoController(LoginService loginService) {
@@ -33,7 +40,10 @@ public class VideoController {
         String loggedInUser = loginService.login(credentials.getUsername());
         System.out.println("loggedInUser = " + loggedInUser);
 
+        List<Video> allVideos = videoService.getVideos();
+
         model.addAttribute("user", loggedInUser);
+        model.addAttribute("allVideos", allVideos);
 
         return "videos";
     }

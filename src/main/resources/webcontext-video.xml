@@ -33,4 +33,20 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="dao" class="com.apposit.training.video.rental.data.auditing.AuditingDAO">
+        <constructor-arg>
+            <bean class="com.apposit.training.video.rental.data.sql.SQLDAO">
+                <!-- <constructor-arg>
+                    <bean class="com.pagatech.services.data.sql.SQLDAO_InternalTransactionalImpl"/>
+                </constructor-arg> -->
+                <property name="dataSource" ref="dataSource"></property>
+
+                <property name="mappersByPackageName">
+                    <list>
+                        <value>com/apposit/training/video/rental/model/sql</value>
+                    </list>
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
 </beans>
