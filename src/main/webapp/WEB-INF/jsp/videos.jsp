@@ -14,7 +14,8 @@
     <meta charset="utf-8">
     <meta name = "format-detection" content = "telephone=no" />
     <link rel="icon" type="image/png" href="<c:url value="/resources/images/favico.ico"/>">
-    <link rel="shortcut icon" href="<c:url value="/resources/images/favicon.ico"/>" />
+    <link rel="shortcut icon" href="<c:url value="/resources/images/favico.ico"/>" />
+    <link rel="stylesheet" href="<c:url value="/resources/css/contact-form.css"/>">
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>">
     <script src="<c:url value="/resources/js/jquery.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery-migrate-1.1.1.js"/>"></script>
@@ -25,6 +26,8 @@
     <script src="<c:url value="/resources/js/jquery.mobilemenu.js"/>"></script>
     <script src="<c:url value="/resources/js/tmStickUp.js"/>"></script>
     <script src="<c:url value="/resources/js/jquery.ui.totop.js"/>"></script>
+    <script src="<c:url value="/resources/js/TMForm.js"/>"></script>
+    <script src="<c:url value="/resources/js/modal.js"/>"></script>
     <script>
         $(window).load(function(){
             $().UItoTop({ easingType: 'easeOutQuart' });
@@ -46,14 +49,18 @@
                         </a>
                     </h1>
                 </div>
-                <div class="clear"></div>
+
+                <h2>
+                    Movie List
+                </h2>
             </div>
 
         </header>
         <!--=====================
                   Content
         ======================-->
-        <section id="content" class="inset__1"><div class="ic">More Website Templates @ TemplateMonster.com - October 06, 2014!</div>
+        <section id="content" class="inset__1">
+
             <div class="container_12">
 
                 <c:forEach items="${allVideos}" var="video">
@@ -67,14 +74,22 @@
                             <p class="color1"></p>
 <%--                                ${video.videoTypeId}--%>
                             <div class="extra_wrapper">
-                                <h4 class="color1"><a href="/video/${user}/${video.id}">${video.title}</a></h4>
+                                <h4 class="color1">${video.title}</h4>
                                 <p class="color1"><strong>GENRE:</strong> ${video.videoGenreId}</p>
                                 <p class="color1"><strong>TYPE:</strong> ${video.videoTypeId}</p>
                             </div>
                         </div>
+
+                        <form id="" action="/video/${user}/${video.id}/" method="get">
+                            <fieldset>
+                                <input type="number" name="days" placeholder="Number of days" value="" data-constraints="@Required @JustNumbers"  />
+                                <button href="#" class="ui-button" data-type="submit">rent</button>
+                            </fieldset>
+                        </form>
                     </div>
 
                 </c:forEach>
+                <div class="clear"></div>
 
             </div>
         </section>
@@ -108,14 +123,6 @@
                       footer
         =================================-->
     </div>
-    <footer id="footer">
-        <div class="container_12">
-            <div class="grid_12">
-                <div class="sub-copy">MOVE &copy; <span id="copyright-year"></span> | <a href="#">Privacy Policy</a> <br> Website designed by <a href="http://www.templatemonster.com/" rel="nofollow">TemplateMonster.com</a></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </footer>
     <a href="#" id="toTop" class="fa fa-angle-up"></a>
 
 </body>

@@ -7,8 +7,7 @@ import com.apposit.training.video.rental.model.Video;
 
 import java.util.*;
 
-@Service
-public class VideoService {
+ class VideoServices {
 
     @Autowired
     private DAO dao;
