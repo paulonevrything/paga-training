@@ -8,27 +8,45 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="com.apposit.training.video.rental" />
+    <context:component-scan base-package="com.apposit.training.video.rental"/>
 
-    <mvc:resources mapping="/resources/**" location="/WEB-INF/assets/" />
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/assets/"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/assets/js/"/>
     <mvc:default-servlet-handler/>
-    <mvc:annotation-driven />
+    <mvc:annotation-driven/>
 
     <bean id="internalViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/video_rental" />
-        <property name="username" value="root" />
-        <property name="password" value="Apposit$1" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/paulonevrything?useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+        <property name="username" value="root"/>
+        <property name="password" value="FGCtimm%*123"/>
     </bean>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="dao" class="com.apposit.training.video.rental.data.auditing.AuditingDAO">
+        <constructor-arg>
+            <bean class="com.apposit.training.video.rental.data.sql.SQLDAO">
+                <!-- <constructor-arg>
+                    <bean class="com.pagatech.services.data.sql.SQLDAO_InternalTransactionalImpl"/>
+                </constructor-arg> -->
+                <property name="dataSource" ref="dataSource"></property>
+
+                <property name="mappersByPackageName">
+                    <list>
+                        <value>com/apposit/training/video/rental/model/sql</value>
+                    </list>
+                </property>
+            </bean>
+        </constructor-arg>
+    </bean>
 </beans>

@@ -1,23 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration  xmlns="http://www.pagatech.com/configuration"
-				xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-				xsi:schemaLocation="http://www.pagatech.com/configuration ../../dataTools/lib/Configuration.xsd"
-				dbServer="localhost"
-				dbType="mysql"
-				dbName="paga.release.ng.1.12.0"
-				dbUser="paga"
-				dbPassword="paga"
-				dbSuperUser="paga"
-				dbSuperUserPassword="paga"
-				recreateObjects="true"
-				sourcePath="src/main/java"
-				rootNamespace="com.apposit.training.video.rental"
-				modelNamespace="model"
-				mappingTypes="sql"
-		 		mappingNamespaces="model.sql"
-		 		resetData="true"
-		 		deployed="true">
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://www.pagatech.com/configuration ../../dataTools/lib/Configuration.xsd"
+                dbServer="${jdbc.server}"
+                dbType="mysql"
+                dbName="${jdbc.catalog}"
+                dbUser="${jdbc.username}"
+                dbPassword="${jdbc.password}"
+                dbSuperUser="${jdbc.username}"
+                dbSuperUserPassword="${jdbc.password}"
+                recreateObjects="true"
+                sourcePath="src/main/java"
+                rootNamespace="com.apposit.training.video.rental"
+                modelNamespace="model"
+                mappingTypes="sql"
+                mappingNamespaces="model.sql"
+                resetData="true"
+                deployed="true">
 
 
+    <!--	Tables highlighted below  -->
+
+    <table recreateTable="true" name="Audit" type="Entity">
+        <fields>
+            <field fieldName="LoginId" dataType="varchar(50)" isNull="false" default="" />
+            <field fieldName="DateTime" dataType="DATETIME" isNull="false" default="" />
+            <field fieldName="Action" dataType="char(1)" isNull="false" default="" />
+            <field fieldName="TableName" dataType="varchar(50)" isNull="false" default="" />
+            <field fieldName="PrimaryKey" dataType="varchar(50)" isNull="false"	default="" />
+            <field fieldName="ColumnName" dataType="varchar(40)" isNull="true" default="" />
+            <field fieldName="NewValue" dataType="varchar(255)" isNull="true" default="" />
+            <field fieldName="OldValue" dataType="varchar(255)" isNull="true" default="" />
+            <field fieldName="CreatedBy" dataType="nvarchar(50)" isNull="true" default="" />
+            <field fieldName="CreatedDate" dataType="DATETIME" isNull="true" default="" />
+            <field fieldName="UpdatedBy" dataType="nvarchar(50)" isNull="true" 	default="" />
+            <field fieldName="UpdatedDate" dataType="DATETIME" isNull="true" default="" />
+        </fields>
+        <excludeObjects>
+            <object name="view" />
+            <object name="procedures" />
+            <object name="triggers" />
+            <object name="model" />
+            <object name="mapping" />
+        </excludeObjects>
+    </table>
+
+
+
+    <table recreateTable="true" name="VideoType" type="Reference" class="com.apposit.training.video.rental.model.VideoTypes">
+        <fields>
+            <field fieldName="Description" dataType="nvarchar(50)" isNull="true" default="" />
+        </fields>
+        <values>
+            <value name="REGULAR" description="Regular" />
+            <value name="CHILDRENS_MOVIE" description="Children's Movie" />
+            <value name="NEW_RELEASE" description="New Release" />
+        </values>
+    </table>
+
+
+
+    <table recreateTable="true" name="VideoGenre" type="Reference" class="com.apposit.training.video.rental.model.VideoGenres">
+        <fields>
+            <field fieldName="Description" dataType="nvarchar(50)" isNull="true" default="" />
+        </fields>
+        <values>
+            <value name="ACTION" description="Action" />
+            <value name="DRAMA" description="Drama" />
+            <value name="ROMANCE" description="Romance" />
+            <value name="COMEDY" description="Comedy" />
+            <value name="HORROR" description="Horror" />
+        </values>
+    </table>
+
+
+
+    <table recreateTable="true" name="Video" type="Entity">
+        <fields>
+            <field fieldName="Title" dataType="varchar(100)" isNull="false" default="" />
+            <field fieldName="ImgUrl" dataType="varchar(500)" isNull="true" default="" />
+            <field fieldName="YearReleased" dataType="int" isNull="true" default="" />
+            <field fieldName="MaximumAge" dataType="int" isNull="true" default="" />
+            <field fieldName="VideoTypeId" dataType="varchar(50)" isNull="false" />
+            <field fieldName="VideoGenreId" dataType="varchar(50)" isNull="false" default="" />
+        </fields>
+        <features>
+            <feature name="Audit" />
+        </features>
+        <relationships>
+            <relationship parentTable="VideoType" fkField="VideoTypeId"/>
+            <relationship parentTable="VideoGenre" fkField="VideoGenreId"/>
+        </relationships>
+    </table>
+
+
+
+<!--    <table recreateTable="true" name="RentPricing" type="Entity">-->
+<!--        <fields>-->
+<!--            <field fieldName="DailyRate" dataType="decimal(18,2)" isNull="false" default="" />-->
+<!--            <field fieldName="VideoTypeId" dataType="varchar(50)" isNull="false" />-->
+<!--        </fields>-->
+<!--        <features>-->
+<!--            <feature name="Audit" />-->
+<!--        </features>-->
+<!--        <relationships>-->
+<!--            <relationship parentTable="VideoType" fkField="VideoTypeId"/>-->
+<!--        </relationships>-->
+<!--    </table>-->
 
 </configuration>
+
+
