@@ -21,7 +21,7 @@ import java.util.List;
 @Controller
 public class VideoController {
 
-
+    @Autowired
     private LoginService loginService;
 
     @Autowired

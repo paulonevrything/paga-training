@@ -7,7 +7,8 @@ import com.apposit.training.video.rental.model.Video;
 
 import java.util.*;
 
- class VideoServices {
+@Service
+public class VideoServicesImpl implements VideoService{
 
     @Autowired
     private DAO dao;
@@ -25,10 +26,5 @@ import java.util.*;
         Video vid = (Video) dao.get(Video.class, id, Locale.ENGLISH);
 
         return vid;
-    }
-
-    public double getPrice() {
-
-        return 0;
     }
 }
