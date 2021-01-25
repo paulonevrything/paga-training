@@ -23,7 +23,7 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-jdbc', version: '3.2.6.RELEASE'
 
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
-    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
 
 
     // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
@@ -46,4 +46,20 @@ dependencies {
 
     compile('com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.4')
 
+    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
+
 }
+
+task stage() {
+    dependsOn clean, war
+}
+war.mustRunAfter clean
+
+task copyToLib(type: Copy) {
+    into "$buildDir/libs"
+    from(configurations.compile) {
+        include "webapp-runner*"
+    }
+}
+
+stage.dependsOn(copyToLib)
